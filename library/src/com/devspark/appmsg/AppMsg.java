@@ -146,6 +146,22 @@ public class AppMsg {
     }
 
     /**
+     * Make a {@link AppMsg} that just contains a text view.
+     * 
+     * @param context
+     *            The context to use. Usually your {@link android.app.Activity}
+     *            object.
+     * @param text
+     *            The text to show. Can be formatted text.
+     * @param style
+     *            The style with a background and a duration.
+     */
+    public static AppMsg makeTextOverlay(Activity context, CharSequence text,
+            Style style) {
+        return makeText(context, text, style, R.layout.app_msg_overlay);
+    }
+
+    /**
      * Make a {@link AppMsg} with a custom layout. The layout must have a {@link TextView} com id {@link android.R.id.message}
      *
      * @param context The context to use. Usually your
