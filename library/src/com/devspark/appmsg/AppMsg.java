@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
@@ -240,12 +241,18 @@ public class AppMsg {
     private static AppMsg makeText(Activity context, CharSequence text, Style style, View view, boolean floating, float textSize) {
         AppMsg result = new AppMsg(context);
 
-        view.setBackgroundResource(style.background);
+//        view.setBackgroundResource(style.background);
 
         TextView tv = (TextView) view.findViewById(android.R.id.message);
         if(textSize > 0) tv.setTextSize(textSize);
         tv.setText(text);
-
+        tv.setBackgroundResource(style.background);
+        AlphaAnimation alpha = new AlphaAnimation(0.6F, 0.6F);
+        alpha.setDuration(0); // Make animation instant
+        alpha.setFillAfter(true); // Tell it to persist after the animation ends
+        // And then on your layout
+        tv.startAnimation(alpha);
+        
         result.mView = view;
         result.mDuration = style.duration;
         result.mFloating = floating;
